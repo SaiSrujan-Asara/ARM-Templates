@@ -1,0 +1,55 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "name": "Vnet2",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "location": "Central India",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "20.0.0.0/16"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "sub1",
+                        "properties": {
+                            "addressPrefix": "20.0.0.0/24"
+                        }
+                    },
+                    {
+                        "name": "sub2",
+                        "properties": {
+                            "addressPrefix": "20.0.1.0/24"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "nic1",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "location": "Central India",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', 'Vnet2')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ip1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'Vnet2', 'sub2')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

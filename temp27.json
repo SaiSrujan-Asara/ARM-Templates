@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+     {
+         "name": "test_app_plan",
+         "type": "Microsoft.Web/serverfarms",
+         "apiVersion": "2020-12-01",
+         "location": "Central India",
+         "sku": {
+             "name": "F1",
+             "capacity": 1
+         },
+         "properties": {
+             "name": "test_app_plan"
+         }
+     },
+    {
+        "name": "test_app10tights",
+        "type": "Microsoft.Web/sites",
+        "apiVersion": "2020-12-01",
+        "location": "Central India",
+        "dependsOn": [
+            "[resourceId('Microsoft.Web/serverfarms', 'test_app_plan')]"
+        ],
+        "properties": {
+            "name": "test_app10tights",
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'test_app_plan')]"
+        }
+    }
+    ]
+}

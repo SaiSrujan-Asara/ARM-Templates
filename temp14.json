@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "strgsku": {
+            "type": "string",
+            "defaultValue": "Standard_LRS",
+            "allowedValues": [
+                "Standard_LRS","Standard_GRS","Standard_RAGRS"
+            ]
+        }
+    },
+    "resources": [
+        {
+            "name": "storagetem00993312",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-04-01",
+            "location": "Central India",
+            "kind": "StorageV2",
+            "sku": {
+                "name": "[parameters('strgsku')]"
+            }
+        }
+    ]
+}

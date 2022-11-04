@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "type": "Microsoft.Compute/disks",
+            "apiVersion": "2021-08-01",
+            "name": "testdk1",
+            "location": "Central India",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "properties": {
+                "creationData":{
+                    "createOption": "Empty"
+                },
+                "diskSizeGB":16
+            }
+        }
+    ]
+}
